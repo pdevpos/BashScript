@@ -1,2 +1,4 @@
 #!/bin/bash
-id -u
+id
+userid=$(id)
+echo "user id: $userid"
