@@ -1,1 +1,1 @@
-echo  '$@'
+echo  "Get all the variables passed to the script: $@"
