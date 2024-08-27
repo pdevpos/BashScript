@@ -9,4 +9,10 @@ then
   exit 1
 fi
 dnf list installed nginx
+if [ $? -ne 0 ];
+then
+  echo "nginx not installed , please install"
+else
+  echo "nginx already installed"
+fi
 
