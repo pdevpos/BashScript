@@ -8,4 +8,5 @@ then
   echo "please run the script with root privileges : $userid"
   exit 1
 fi
-dnf install nginx -y
+dnf list installed nginx
+
