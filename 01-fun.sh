@@ -15,14 +15,19 @@ validate()
 
   fi
 }
+Install_package()
+{
+  if [ $1 -ne 0 ]; then
+    echo "$2 not installed...$3"
+    dnf install nginx -y
+    validate $? "$2 installed"
+
+  else
+    echo "nginx already installed"
+  fi
+}
 
 dnf list installed nginx
-if [ $? -ne 0 ]; then
-  echo "nginx not installed...please install"
-  dnf install nginx -y
-  validate $? "nginx installed"
+Install_package $? "nginx" "please install"
 
-else
-  echo "nginx already installed"
-fi
 
