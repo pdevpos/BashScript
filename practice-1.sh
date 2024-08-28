@@ -25,14 +25,18 @@ if [ $? -ne 0 ]
 then
   echo "nginx not installed please install...."
   dnf install nginx -y
-#  if [ $? -ne 0 ]; then
-#    echo -e "nginx installed $R failure.check it..."
-#  else
-#    echo -e "nginx installed $G success $N."
-#
-#  fi
-   validate $?
+  validate $?
 else
   echo -e "$Y nginx is installed already...."
+fi
+
+dnf list installed mysql
+if [ $? -ne 0 ]
+then
+  echo "mysql not installed please install...."
+  dnf install mysql -y
+  validate $?
+else
+  echo -e "$Y mysql is installed already...."
 fi
 
