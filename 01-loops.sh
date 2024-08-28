@@ -20,8 +20,10 @@ validate()
   fi
 }
 check_root
+
 for package in $@
 do
+  dnf list installed $package
   if [ $? -ne 0 ]
   then
     echo "$package not installed please install...."
