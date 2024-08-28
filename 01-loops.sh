@@ -15,9 +15,11 @@ check_root(){
 validate()
 {
   if [ $1 -ne 0 ]; then
-    echo -e "$2  not installed properly its $R failure.check it..."&>>$logfile+$DATE
+    echo -e "$2  not installed properly its $R failure.check it..."&>>$logfile
+    echo $DATE
   else
-    echo -e "$2 installed $G success $N."&>>$logfile+$DATE
+    echo -e "$2 installed $G success $N."&>>$logfile
+    echo $DATE
   fi
 }
 check_root
