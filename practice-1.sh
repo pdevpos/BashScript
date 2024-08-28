@@ -7,3 +7,10 @@ check_root(){
   fi
 }
 check_root
+dnf list installed nginx
+if [ $? -ne 0 ]
+then
+  echo "nginx not installed please install...."
+  dnf install nginx
+else
+  echo "nginx is installed already...."
