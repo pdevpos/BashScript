@@ -5,21 +5,23 @@ G="\e[32m"
 Y="\e[33m"
 N="\e[0m"
 DATE=$(date)
-logfile=/var/log/shell-script/shell.log
+logfile=/var/log/shell-script/shell-$DATE.log
+
 check_root(){
   if [ $USERID -ne 0 ]; then
     echo "execute script in root privileges:: $USERID"
     exit 1
   fi
 }
+
 validate()
 {
   if [ $1 -ne 0 ]; then
     echo -e "$2  not installed properly its $R failure.check it..."&>>$logfile
-    echo $DATE
+
   else
     echo -e "$2 installed $G success $N."&>>$logfile
-    echo $DATE
+
   fi
 }
 check_root
