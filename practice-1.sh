@@ -14,3 +14,4 @@ then
   dnf install nginx
 else
   echo "nginx is installed already...."
+fi
