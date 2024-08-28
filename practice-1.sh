@@ -1,7 +1,7 @@
 #!/bin/bash
 USERID=$(id -u)
-G=\e[31m
-N=\e[0m
+G="\e[31m"
+N="\e[0m"
 check_root(){
   if [ $USERID -ne 0 ]; then
     echo "execute script in root privileges:: $USERID"
@@ -17,7 +17,7 @@ then
   if [ $? -ne 0 ]; then
     echo "nginx installed failure.check it..."
   else
-    echo -e " nginx installed $G success $N."
+    echo -e "nginx installed $G success $N."
 
   fi
 else
