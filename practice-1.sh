@@ -12,6 +12,12 @@ if [ $? -ne 0 ]
 then
   echo "nginx not installed please install...."
   dnf install nginx -y
+  if [ $? -ne 0 ]; then
+    echo "nginx installed failure.check it..."
+  else
+    echo "nginx installed success."
+
+  fi
 else
   echo "nginx is installed already...."
 fi
