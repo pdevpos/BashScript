@@ -4,7 +4,7 @@ R="\e[31m"
 G="\e[32m"
 Y="\e[33m"
 N="\e[0m"
-logfile="/var/log/shell-script"
+logfile="/var/log/shell-script/shell.log"
 check_root(){
   if [ $USERID -ne 0 ]; then
     echo "execute script in root privileges:: $USERID"
