@@ -4,7 +4,7 @@ R="\e[31m"
 G="\e[32m"
 Y="\e[33m"
 N="\e[0m"
-DATE=$(date+%F)
+DATE=$(date)
 logfile=/var/log/shell-script/shell-$DATE.log
 
 check_root(){
