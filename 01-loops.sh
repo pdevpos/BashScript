@@ -4,7 +4,7 @@ R="\e[31m"
 G="\e[32m"
 Y="\e[33m"
 N="\e[0m"
-DATE=$(date)
+DATE=$(date+%F)
 logfile=/var/log/shell-script/shell-$DATE.log
 
 check_root(){
@@ -17,8 +17,8 @@ check_root(){
 validate()
 {
   if [ $1 -ne 0 ]; then
-    echo -e "$2  not installed properly its $R failure.check it..."&>>$logfile
-
+    echo -e "$2  not installed properly its $R failure.check it..."| tee -a &>>$logfile
+#     echo -e "$2  not installed properly its $R failure.check it..."| tee -a &>>$logfile
   else
     echo -e "$2 installed $G success $N."&>>$logfile
 
@@ -28,7 +28,7 @@ check_root
 
 for package in $@
 do
-  dnf list installed $package
+  dnf list installed $package &>>$logfile
   if [ $? -ne 0 ]
   then
     echo "$package not installed please install...."&>>$logfile
