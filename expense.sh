@@ -23,7 +23,7 @@ if [ $? -ne 0 ]; then
   dnf install mysql-server -y &>>$logfile
   validate $? "mysql-server"
 else
-  echo -e "$G mysql-server installed already.nothing to do!..$N"&>>$logfile
+  echo -e "$G mysql-server installed already.nothing to do!..$N" | tees -a $logfile
 fi
 
 
