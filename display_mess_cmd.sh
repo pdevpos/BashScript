@@ -28,7 +28,7 @@ check_root
 
 for package in $@
 do
-  dnf list installed $package | tee -a $logfile
+  dnf list installed $package  &>>$logfile
   if [ $? -ne 0 ]
   then
     echo "$package not installed please install...."| tee -a $logfile
