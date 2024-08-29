@@ -40,8 +40,15 @@ systemctl enable mysqld
 validate $? "Enable mysqld" &>>$logfile
 systemctl start mysqld
 validate $? "Start mysqld" &>>$logfile
-mysql_secure_installation --set-root-pass ExpenseApp@1
-validate $? "Set mysql root password"
+mysql -h 172.31.86.123 -u root -pExpenseApp@1 -e 'show databases' &>>$logfile
+if [ $? -ne 0 ]; then
+  echo -e "$R mysql password not set,please set mysql root password $N"&>>$logfile
+  mysql_secure_installation --set-root-pass ExpenseApp@1
+  validate $? "mysql-server set password"
+else
+  echo -e "$G Password already set, You cannot reset the password with mysql_secure_installation...$N"&>>$logfile
+fi
+
 #usage $#
 #for package in $@
 #do
