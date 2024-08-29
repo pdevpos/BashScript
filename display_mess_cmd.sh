@@ -17,7 +17,7 @@ check_root(){
 validate()
 {
   if [ $1 -ne 0 ]; then
-    echo -e "$2  not installed properly its $R failure.check it..." &>>$logfile
+    echo -e "$2  not installed properly its $R failure.check it..."| tee -a $logfile
 #     echo -e "$2  not installed properly its $R failure.check it..."| tee -a &>>$logfile
   else
     echo -e "$2 installed $G success $N."&>>$logfile
@@ -28,13 +28,13 @@ check_root
 
 for package in $@
 do
-  dnf list installed $package &>>$logfile
+  dnf list installed $package | tee -a $logfile
   if [ $? -ne 0 ]
   then
-    echo "$package not installed please install...."&>>$logfile
-    dnf install $package -y
+    echo "$package not installed please install...."| tee -a $logfile
+    dnf install $package -y | tee -a $logfile
     validate $? "package"
   else
-    echo -e "$Y $package is installed already....$N"&>>$logfile
+    echo -e "$Y $package is installed already....$N"| tee -a $logfile
   fi
 done
