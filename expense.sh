@@ -3,14 +3,23 @@ R="\e[31m"
 G="\e[32m"
 Y="\e[33m"
 N="\e[0m"
-date=$(date)
-logfile=/var/log/shell-script/expense-$date.log
+date=$(date +"%Y-%m-%d %H:%M:%S")
+script_name=$0
+logfolder=/var/log/shell-script
+logfile=$logfolder/$script_name-$date.log
 validate()
 {
   if [ $1 -ne 0 ]; then
     echo -e "$R $2 installation failed.please check $N"&>>$logfile
   else
     echo -e "$G $2 installation success $N"&>>$logfile
+  fi
+}
+usage()
+{
+  if [ $1 -eq 0 ]; then
+    echo "Please add params like package1,package2...."
+    exit 1
   fi
 }
 if [ $userid -ne 0 ]; then
@@ -25,6 +34,7 @@ fi
 #else
 #  echo -e "$G mysql-server installed already.nothing to do!..$N" | tee -a $logfile
 #fi
+usage $#
 for package in $@
 do
 dnf list installed $package
