@@ -32,7 +32,7 @@ do
   if [ $? -ne 0 ]
   then
     echo "$package not installed please install...."| tee -a $logfile
-    dnf install $package -y | tee -a $logfile
+    dnf install $package -y
     validate $? "package"
   else
     echo -e "$Y $package is installed already....$N"| tee -a $logfile
