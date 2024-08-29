@@ -18,7 +18,7 @@ validate()
 usage()
 {
   if [ $1 -eq 0 ]; then
-    echo "Please add params like package1,package2...."
+    echo "Please pass params like package1,package2...."
     exit 1
   fi
 }
@@ -26,25 +26,33 @@ if [ $userid -ne 0 ]; then
     echo -e "$Y script packages executes with root privileges $N $userid"
     exit 1
 fi
-#dnf list installed mysql-server
-#if [ $? -ne 0 ]; then
-#  echo -e "$Y mysql-server not installed.please installed it..$N"&>>$logfile
-#  dnf install mysql-server -y &>>$logfile
-#  validate $? "mysql-server"
-#else
-#  echo -e "$G mysql-server installed already.nothing to do!..$N" | tee -a $logfile
-#fi
-usage $#
-for package in $@
-do
-dnf list installed $package
+
+dnf list installed mysql-server
 if [ $? -ne 0 ]; then
-  echo -e "$Y $package not installed.please installed it..$N"&>>$logfile
-  dnf install $package -y &>>$logfile
-  validate $? $package
+  echo -e "$Y mysql-server not installed.please installed it..$N"&>>$logfile
+  dnf install mysql-server -y &>>$logfile
+  validate $? "mysql-server"
 else
-  echo -e "$G $package installed already.nothing to do!..$N" | tee -a $logfile
+  echo -e "$G mysql-server installed already.nothing to do!..$N" | tee -a $logfile
 fi
-done
+
+systemctl enable mysqld
+validate $? "Enable mysqld" &>>$logfile
+systemctl start mysqld
+validate $? "Start mysqld" &>>$logfile
+#usage $#
+#for package in $@
+#do
+#dnf list installed $package
+#if [ $? -ne 0 ]; then
+#  echo -e "$Y $package not installed.please installed it..$N"&>>$logfile
+#  dnf install $package -y &>>$logfile
+#  validate $? $package
+#else
+#  echo -e "$G $package installed already.nothing to do!..$N" | tee -a $logfile
+#fi
+#
+#done
+
 
 
