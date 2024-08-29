@@ -4,7 +4,7 @@ G="\e[32m"
 Y="\e[33m"
 N="\e[0m"
 date=$(date)
-logfile="/var/log/shell-script/expense-$date.log"
+logfile=/var/log/shell-script/expense-$date.log
 validate()
 {
   if [ $1 -ne 0 ]; then
