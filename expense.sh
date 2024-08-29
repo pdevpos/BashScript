@@ -17,13 +17,24 @@ if [ $userid -ne 0 ]; then
     echo -e "$Y script packages executes with root privileges $N $userid"
     exit 1
 fi
-dnf list installed mysql-server
+#dnf list installed mysql-server
+#if [ $? -ne 0 ]; then
+#  echo -e "$Y mysql-server not installed.please installed it..$N"&>>$logfile
+#  dnf install mysql-server -y &>>$logfile
+#  validate $? "mysql-server"
+#else
+#  echo -e "$G mysql-server installed already.nothing to do!..$N" | tee -a $logfile
+#fi
+for package in $@
+do
+dnf list installed $package
 if [ $? -ne 0 ]; then
-  echo -e "$Y mysql-server not installed.please installed it..$N"&>>$logfile
-  dnf install mysql-server -y &>>$logfile
-  validate $? "mysql-server"
+  echo -e "$Y $package not installed.please installed it..$N"&>>$logfile
+  dnf install $package -y &>>$logfile
+  validate $? $package
 else
-  echo -e "$G mysql-server installed already.nothing to do!..$N" | tee -a $logfile
+  echo -e "$G $package installed already.nothing to do!..$N" | tee -a $logfile
 fi
+done
 
 
