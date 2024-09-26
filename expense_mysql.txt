@@ -1,0 +1,31 @@
+first check mysql-server installed or not
+dnf list installed mysql-server
+check with previous cmd $? ,if exit status 1 ,package not installed ,0 package installed
+$?
+if[ $? -ne 0 ] then
+echo "mysql-server not installed,please install it"
+dnf install mysql-server -y
+validate $?
+else
+echo "mysql-server already installed"
+fi
+
+systemctl enable mysqld
+validate $? "mysql service enabled"
+systemctl start mysqld
+validate $? "mysql service started"
+mysql_secure_installation --set-root-pass ExpenseApp@1
+validate $? "mysql root password setup"
+* if you run second time , already password set cannot set one more time.
+* so check the condition if password already set or not
+mysql -h "dns record name" 
+if[$? -ne 0]
+then
+echo "passowrd not set"
+mysql_secure_installation --set-root-pass ExpenseApp@1
+validate $?
+else
+echo "password set"
+
+
+
